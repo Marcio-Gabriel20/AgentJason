@@ -10,4 +10,5 @@ myName("alice").
 
 /* Plans */
 
-+!start : true <- .send(bob,tell,hello).
++!start : true <-
+    .send(bob,tell,hello).

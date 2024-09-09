@@ -12,5 +12,3 @@ myName("bob").
 
 +!start : true <-
     .print("hello world.").
-
-+hello <- .print("Bob recebeu a mensagem 'hello' de Alice.").
