@@ -114,6 +114,7 @@ public class Env extends Environment {
             removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
             addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
             System.out.println("Score: " + consultPercepts("bob").getFirst());
+            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myScore(1)").addSource(ASSyntax.parseTerm("percept"))));
             posicionarItem();
         }
     }
