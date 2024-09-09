@@ -111,10 +111,11 @@ public class Env extends Environment {
     private void verificarColisao() throws ParseException {
         if (player.getBoundsInParent().intersects(item.getBoundsInParent())) {
             score++;
-            removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
-            addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
+            removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")").addSource(ASSyntax.parseTerm("percept")));
+            addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")").addSource(ASSyntax.parseTerm("percept")));
             System.out.println("Score: " + consultPercepts("bob").getFirst());
             System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myScore(1)").addSource(ASSyntax.parseTerm("percept"))));
+            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)").addSource(ASSyntax.parseTerm("self"))));
             posicionarItem();
         }
     }
