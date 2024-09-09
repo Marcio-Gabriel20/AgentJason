@@ -1,5 +1,7 @@
 package example;
 
+import jason.asSemantics.Agent;
+import jason.runtime.RuntimeServices;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -90,7 +92,7 @@ public class Env extends Environment {
             }
         });
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.017), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.020), event -> {
             if (isAutoControl) {
                 controleAutomatico.atualizarControle(player, item);
             }
@@ -111,8 +113,8 @@ public class Env extends Environment {
     private void verificarColisao() throws ParseException {
         if (player.getBoundsInParent().intersects(item.getBoundsInParent())) {
             score++;
-            removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")").addSource(ASSyntax.parseTerm("percept")));
-            addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")").addSource(ASSyntax.parseTerm("percept")));
+            removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
+            addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
             System.out.println("Score: " + consultPercepts("bob").getFirst());
             System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myScore(1)").addSource(ASSyntax.parseTerm("percept"))));
             System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)").addSource(ASSyntax.parseTerm("self"))));
