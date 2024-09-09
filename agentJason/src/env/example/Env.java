@@ -82,7 +82,11 @@ public class Env extends Environment {
 
             if (event.getCode() == KeyCode.A) {
                 isAutoControl = !isAutoControl;
-                System.out.println("Controle automático: " + isAutoControl);
+                if(isAutoControl == true) {
+                    System.out.println("Controle automático: Ativado");
+                } else {
+                    System.out.println("Controle automático: Desativado");
+                }
             }
         });
 
@@ -99,7 +103,7 @@ public class Env extends Environment {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-        primaryStage.setTitle("Jogo com Controle Automático");
+        primaryStage.setTitle("ChonGame");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
