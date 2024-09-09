@@ -33,6 +33,7 @@ public class Env extends Environment {
         try {
             addPercept("bob", ASSyntax.parseLiteral("myName(bob)"));
             addPercept("alice", ASSyntax.parseLiteral("myName(alice)"));
+            addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
 
             System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)")));
             System.out.println(containsPercept("alice", ASSyntax.parseLiteral("myName(alice)")));
@@ -73,7 +74,11 @@ public class Env extends Environment {
                     player.setTranslateY(player.getTranslateY() + 10);
                 }
 
-                verificarColisao();
+                try {
+                    verificarColisao();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             if (event.getCode() == KeyCode.A) {
@@ -86,7 +91,11 @@ public class Env extends Environment {
             if (isAutoControl) {
                 controleAutomatico.atualizarControle(player, item);
             }
-            verificarColisao();
+            try {
+                verificarColisao();
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -96,9 +105,11 @@ public class Env extends Environment {
         primaryStage.show();
     }
 
-    private void verificarColisao() {
+    private void verificarColisao() throws ParseException {
         if (player.getBoundsInParent().intersects(item.getBoundsInParent())) {
             score++;
+            removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
+            addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
             System.out.println("Score: " + score);
             posicionarItem();
         }
