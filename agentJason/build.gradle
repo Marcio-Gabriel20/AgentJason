@@ -5,6 +5,10 @@
    setembro 08, 2024 - 23:03:55
 */
 
+plugins {
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
 defaultTasks 'run'
 
 apply plugin: 'java'
@@ -21,6 +25,8 @@ repositories {
 
 dependencies {
     implementation 'io.github.jason-lang:jason-interpreter:3.2.0'
+    implementation 'org.openjfx:javafx-controls:20'
+    implementation 'org.openjfx:javafx-fxml:20'
 
     // to use locally installed jars:
     implementation fileTree(dir: 'lib', include: '*.jar')
