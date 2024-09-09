@@ -82,7 +82,7 @@ public class Env extends Environment {
 
             if (event.getCode() == KeyCode.A) {
                 isAutoControl = !isAutoControl;
-                if(isAutoControl == true) {
+                if(isAutoControl) {
                     System.out.println("Controle automático: Ativado");
                 } else {
                     System.out.println("Controle automático: Desativado");
@@ -111,6 +111,7 @@ public class Env extends Environment {
     private void verificarColisao() throws ParseException {
         if (player.getBoundsInParent().intersects(item.getBoundsInParent())) {
             score++;
+            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("hello")));
             removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
             addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
             System.out.println("Score: " + consultPercepts("bob").getFirst());

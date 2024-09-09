@@ -10,4 +10,4 @@ myName("alice").
 
 /* Plans */
 
-+!start : true <- .print("hello world.").
++!start : true <- .send(bob,tell,hello).

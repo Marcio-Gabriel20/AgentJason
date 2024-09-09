@@ -12,7 +12,7 @@
 
 MAS agentJason {
 
-    environment: example.Env(10)
+    environment: example.Env(alice)
 
     agents: bob;
             alice;
