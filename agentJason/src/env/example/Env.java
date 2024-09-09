@@ -17,7 +17,11 @@ public class Env extends Environment {
     public void init(String[] args) {
         super.init(args);
         try {
-            addPercept(ASSyntax.parseLiteral("percept("+args[0]+")"));
+//            addPercept("bob", ASSyntax.parseLiteral("myName(bob)"));
+//            addPercept("alice", ASSyntax.parseLiteral("myName(alice)"));
+            
+            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)")));
+            System.out.println(containsPercept("alice", ASSyntax.parseLiteral("myName(alice)")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
