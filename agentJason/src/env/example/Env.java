@@ -111,7 +111,6 @@ public class Env extends Environment {
     private void verificarColisao() throws ParseException {
         if (player.getBoundsInParent().intersects(item.getBoundsInParent())) {
             score++;
-            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("hello")));
             removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
             addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
             System.out.println("Score: " + consultPercepts("bob").getFirst());
