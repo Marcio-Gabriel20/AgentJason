@@ -2,6 +2,8 @@
 
 /* Initial beliefs and rules */
 
+myName("alice").
+
 /* Initial goals */
 
 !start.
