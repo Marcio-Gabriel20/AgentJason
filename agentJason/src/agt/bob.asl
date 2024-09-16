@@ -11,6 +11,7 @@ myName("bob").
 /* Plans */
 
 +!start : true <-
+    hi;
     .print("hello world.").
 
 +hello <- .print("Bob recebeu a mensagem 'hello' de Alice.").

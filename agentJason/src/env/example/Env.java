@@ -131,6 +131,9 @@ public class Env extends Environment {
     @Override
     public boolean executeAction(String agName, Structure action) {
         logger.info("executing: "+action+", for agent: " + agName);
+        if (agName.equals("bob") && action.getFunctor().equals("hi")) {
+            logger.info("Mexi no ambiente!");
+        }
         informAgsEnvironmentChanged();
         return true;
     }
