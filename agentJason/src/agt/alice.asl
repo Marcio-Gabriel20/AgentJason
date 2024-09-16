@@ -11,4 +11,4 @@ myName("alice").
 /* Plans */
 
 +!start : true <-
-    .send(bob,tell,hello).
+    .send(bob,tell,hello("mensagem do Alice para Bob")).

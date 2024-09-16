@@ -115,9 +115,9 @@ public class Env extends Environment {
             score++;
             removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
             addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
-            System.out.println("Score: " + consultPercepts("bob").getFirst());
-            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myScore(1)").addSource(ASSyntax.parseTerm("percept"))));
-            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)").addSource(ASSyntax.parseTerm("self"))));
+//            System.out.println("Score: " + consultPercepts("bob").getFirst());
+//            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myScore(1)").addSource(ASSyntax.parseTerm("percept"))));
+//            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)").addSource(ASSyntax.parseTerm("self"))));
             posicionarItem();
         }
     }
@@ -135,6 +135,7 @@ public class Env extends Environment {
         logger.info("executing: "+action+", for agent: " + agName);
         if (agName.equals("bob") && action.getFunctor().equals("hi")) {
             logger.info("Mexi no ambiente!");
+            logger.info(String.valueOf(action.getFunctor().equals("hi")));
         }
         informAgsEnvironmentChanged();
         return true;
