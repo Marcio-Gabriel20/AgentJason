@@ -39,6 +39,12 @@ public class Env extends Environment {
             System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)")));
             System.out.println(containsPercept("alice", ASSyntax.parseLiteral("myName(alice)")));
 
+//            addPercept("bob", ASSyntax.parseLiteral("playerPositionX(0)"));
+//            addPercept("bob", ASSyntax.parseLiteral("playerPositionY(0)"));
+
+//            addPercept("bob", ASSyntax.parseLiteral("playerPositionX("+ player.getTranslateX() + ")"));
+//            addPercept("bob", ASSyntax.parseLiteral("playerPositionY("+ player.getTranslateY() + ")"));
+
             Platform.startup(this::startJavaFX);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -64,15 +70,39 @@ public class Env extends Environment {
             if (!isAutoControl) {
                 if (event.getCode() == KeyCode.LEFT && player.getTranslateX() > 0) {
                     player.setTranslateX(player.getTranslateX() - 10);
+                    try {
+                        removePercept("bob", ASSyntax.parseLiteral("playerPositionX(" + (player.getTranslateX() + 10) + ")"));
+                        addPercept("bob", ASSyntax.parseLiteral("playerPositionX(" + player.getTranslateX() + ")"));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 if (event.getCode() == KeyCode.RIGHT && player.getTranslateX() < 800 - 50) {
                     player.setTranslateX(player.getTranslateX() + 10);
+                    try {
+                        removePercept("bob", ASSyntax.parseLiteral("playerPositionX(" + (player.getTranslateX() - 10) + ")"));
+                        addPercept("bob", ASSyntax.parseLiteral("playerPositionX(" + player.getTranslateX() + ")"));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 if (event.getCode() == KeyCode.UP && player.getTranslateY() > 0) {
                     player.setTranslateY(player.getTranslateY() - 10);
+                    try {
+                        removePercept("bob", ASSyntax.parseLiteral("playerPositionY(" + (player.getTranslateY() + 10) + ")"));
+                        addPercept("bob", ASSyntax.parseLiteral("playerPositionY(" + player.getTranslateY() + ")"));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 if (event.getCode() == KeyCode.DOWN && player.getTranslateY() < 600 - 50) {
                     player.setTranslateY(player.getTranslateY() + 10);
+                    try {
+                        removePercept("bob", ASSyntax.parseLiteral("playerPositionY(" + (player.getTranslateY() - 10) + ")"));
+                        addPercept("bob", ASSyntax.parseLiteral("playerPositionY(" + player.getTranslateY() + ")"));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
                 try {
@@ -115,6 +145,7 @@ public class Env extends Environment {
             score++;
             removePercept("bob", ASSyntax.parseLiteral("myScore("+ (score-1) +")"));
             addPercept("bob", ASSyntax.parseLiteral("myScore("+ score +")"));
+
 //            System.out.println("Score: " + consultPercepts("bob").getFirst());
 //            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myScore(1)").addSource(ASSyntax.parseTerm("percept"))));
 //            System.out.println(containsPercept("bob", ASSyntax.parseLiteral("myName(bob)").addSource(ASSyntax.parseTerm("self"))));
@@ -133,9 +164,19 @@ public class Env extends Environment {
     @Override
     public boolean executeAction(String agName, Structure action) {
         logger.info("executing: "+action+", for agent: " + agName);
-        if (agName.equals("bob") && action.getFunctor().equals("hi")) {
+        if (agName.equals("bob") && action.getFunctor().equals("moveRight")) {
             logger.info("Mexi no ambiente!");
             logger.info(String.valueOf(action.getFunctor().equals("hi")));
+            while (agName.equals("bob") && action.getFunctor().equals("moveRight")) {
+                if(player.getTranslateX() != 0.0) {
+                    player.setTranslateX(player.getTranslateX() + 10);
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         informAgsEnvironmentChanged();
         return true;

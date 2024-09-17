@@ -27,5 +27,9 @@ myScoreBob(0).
 /*+!start:
     mensagem_recebida(Msg) <-
         .print("Mensagem de Alice para Bob: ", Msg).*/
-+!start:
++!move: true <-
+    moveRight;
+    .print("Movendo para direita...").
++!start: true <-
+    !move;
     .print("Estou jogando!").
